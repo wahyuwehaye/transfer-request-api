@@ -1,0 +1,164 @@
+paths:
+  /transfers:
+    post:
+      tags:
+      - Transfers
+      summary: Create a new transfer request
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                amount:
+                  type: number
+                  format: float
+                description:
+                  type: string
+                status:
+                  type: string
+                  enum:
+                  - pending
+                  - approved
+                  - rejected
+                  - done
+      responses:
+        201:
+          description: Transfer request created successfully
+        400:
+          description: Invalid input
+        500:
+          description: Server error
+
+  /transfers:
+    get:
+      tags:
+      - Transfers
+      summary: Fetch all transfer requests
+      responses:
+        200:
+          description: List of all transfer requests
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    amount:
+                      type: number
+                      format: float
+                    description:
+                      type: string
+                    status:
+                      type: string
+                      enum:
+                      - pending
+                      - approved
+                      - rejected
+                      - done
+        500:
+          description: Server error
+
+  /transfers/{transferId}:
+    get:
+      tags:
+      - Transfers
+      summary: Fetch a specific transfer by its ID
+      parameters:
+      - name: transferId
+        in: path
+        description: ID of the transfer to fetch
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: Details of the specific transfer
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  amount:
+                    type: number
+                    format: float
+                  description:
+                    type: string
+                  status:
+                    type: string
+                    enum:
+                    - pending
+                    - approved
+                    - rejected
+                    - done
+        404:
+          description: Transfer not found
+        500:
+          description: Server error
+
+  /transfers/{transferId}:
+    put:
+      tags:
+      - Transfers
+      summary: Update a transfer request by its ID
+      parameters:
+      - name: transferId
+        in: path
+        description: ID of the transfer to update
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                amount:
+                  type: number
+                  format: float
+                description:
+                  type: string
+                status:
+                  type: string
+                  enum:
+                  - pending
+                  - approved
+                  - rejected
+                  - done
+      responses:
+        200:
+          description: Transfer updated successfully
+        400:
+          description: Invalid input
+        404:
+          description: Transfer not found
+        500:
+          description: Server error
+
+  /transfers/{transferId}/delete:
+    put:
+      tags:
+      - Transfers
+      summary: Soft delete a transfer request by its ID
+      parameters:
+      - name: transferId
+        in: path
+        description: ID of the transfer to soft delete
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: Transfer soft deleted successfully
+        404:
+          description: Transfer not found
+        500:
+          description: Server error

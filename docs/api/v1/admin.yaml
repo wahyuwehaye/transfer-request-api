@@ -1,0 +1,117 @@
+paths:
+  /admin/transfers:
+    get:
+      tags:
+      - Admin
+      summary: View all transfer requests
+      responses:
+        200:
+          description: List of all transfer requests
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    amount:
+                      type: number
+                      format: float
+                    description:
+                      type: string
+                    status:
+                      type: string
+                      enum:
+                      - pending
+                      - approved
+                      - rejected
+                      - done
+                    deleted:
+                      type: boolean
+        500:
+          description: Server error
+
+  /admin/transfers/{transferId}/delete:
+    put:
+      tags:
+      - Admin
+      summary: Soft delete a transfer request by its ID
+      parameters:
+      - name: transferId
+        in: path
+        description: ID of the transfer to soft delete
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: Transfer soft deleted successfully
+        404:
+          description: Transfer not found
+        500:
+          description: Server error
+
+  /admin/transfers/history:
+    get:
+      tags:
+      - Admin
+      summary: Fetch history of all transfer requests
+      parameters:
+      - name: startDate
+        in: query
+        description: Start date for filtering
+        required: false
+        schema:
+          type: string
+          format: date
+      - name: endDate
+        in: query
+        description: End date for filtering
+        required: false
+        schema:
+          type: string
+          format: date
+      - name: status
+        in: query
+        description: Filter by transfer status
+        required: false
+        schema:
+          type: string
+          enum:
+          - pending
+          - approved
+          - rejected
+          - done
+      responses:
+        200:
+          description: List of all transfer requests matching the criteria
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    amount:
+                      type: number
+                      format: float
+                    description:
+                      type: string
+                    status:
+                      type: string
+                      enum:
+                      - pending
+                      - approved
+                      - rejected
+                      - done
+                    createdDate:
+                      type: string
+                      format: date
+        400:
+          description: Invalid input
+        500:
+          description: Server error

@@ -1,0 +1,43 @@
+{
+  "name": "transfer-request-api",
+  "version": "1.0.0",
+  "description": "Transfer Request Management API using Node.js, Express, and MongoDB.",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yourusername/transfer-request-api.git"
+  },
+  "author": "Wehaye",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yourusername/transfer-request-api/issues"
+  },
+  "homepage": "https://github.com/yourusername/transfer-request-api#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.1",
+    "mongoose": "^7.4.4",
+    "swagger-ui-express": "^5.0.0"
+  },
+  "devDependencies": {
+    "chai": "^4.3.8",
+    "jest": "^29.6.4",
+    "mocha": "^10.2.0",
+    "mongodb-memory-server": "^8.15.1",
+    "nodemon": "^3.0.1",
+    "supertest": "^6.3.3"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "setupFilesAfterEnv": ["/tests/setupTests.js"]
+  }
+}
